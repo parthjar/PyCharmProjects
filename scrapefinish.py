@@ -23,7 +23,7 @@ config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
 finishing_root = 'https://www.finishing.com'
 url_index = []
 pagelinks = []
-
+failedlinks =[]
 ignorelinks = ['https://www.finishing.com/shops/index.html',
         'https://www.finishing.com/equipment/index.html',
         'https://www.finishing.com/chemicals/index.html',
@@ -45,8 +45,12 @@ for i in range(1):
         name = format_filename(link.get_text())
         if url not in ignorelinks:
             pagelinks.append(url)
-            
-            pdfkit.from_url(url,name+'.pdf',configuration=config)
+            try:
+                pdfkit.from_url(url,'C:\Finishing\\'+name+'.pdf',configuration=config)
+            except:
+                failedlinks.append(url)
+
+print(failedlinks)
 
 # path_wkthmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 # config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
