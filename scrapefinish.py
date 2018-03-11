@@ -51,6 +51,14 @@ for i in range(1):
                 failedlinks.append(url)
 
 print(failedlinks)
+print('/n Trying to download failed-links again')
+
+for url in failedlinks:
+        pdfkit.from_url(url, 'C:\Finishing\\' + name + '1.pdf', configuration=config)
+        failedlinks.remove(url)
+
+print('The following links failed to download (2 attempts)/n')
+print(failedlinks)
 
 # path_wkthmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 # config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
