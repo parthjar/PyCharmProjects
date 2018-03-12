@@ -36,7 +36,7 @@ ignorelinks = ['https://www.finishing.com/shops/index.html',
         'https://www.finishing.com/letters/index.html',
         'https://www.finishing.com/search/searchgoogle.html']
 
-for i in range(1):
+for i in range(61):
     url_index.append(finishing_root + '/letters/archive' + str(i) + '000.html')
     res = requests.get(url_index[i])
     soup = bs4.BeautifulSoup(res.content)
@@ -53,9 +53,9 @@ for i in range(1):
 print(failedlinks)
 print('/n Trying to download failed-links again')
 
-for url in failedlinks:
+while len(failedlinks)>0:
+        url = failedlinks.pop(0)
         pdfkit.from_url(url, 'C:\Finishing\\' + name + '1.pdf', configuration=config)
-        failedlinks.remove(url)
 
 print('The following links failed to download (2 attempts)/n')
 print(failedlinks)
